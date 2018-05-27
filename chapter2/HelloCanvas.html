@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Draw a blue rectangle</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body onload="main()">
+  <canvas id="webgl" width="400" height="400">
+   Please use a browser that supports "canvas"
+  </canvas>
+  <script src="../lib/webgl-utils.js"></script> 
+  <script src="../lib/webgl-debug.js"></script> 
+  <script src="../lib/cuon-utils.js"></script> 
+  <script>
+    function main() {
+      var canvas = document.querySelector('#webgl');
+      var gl = getWebGLContext(canvas);
+      if(!gl) {
+        console.log('Failed to get the endering context for WebGL');
+        return ;
+      }
+      gl.clearColor(0.0, 0.0, 1.0, 1.0);
+      // 清空<canvas>
+      gl.clear(gl.COLOR_BUFFER_BIT);
+    }
+  </script>
+</body>
+</html>

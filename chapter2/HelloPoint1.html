@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Draw a point(1)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body onload="main()">
+  <canvas id="webgl" width="400" height="400">
+   Please use a browser that supports "canvas"
+  </canvas>
+  <script src="../lib/webgl-utils.js"></script> 
+  <script src="../lib/webgl-debug.js"></script> 
+  <script src="../lib/cuon-utils.js"></script> 
+  <script>
+    // 顶点着色器程序
+    var VSHADER_SOURCE = 
+      'void main(){\n' +
+      ' gl_Position = vec4(0.0, 0.5, 0.0, 1.0);\n' +   // 设置坐标
+      ' gl_PointSize = 10.0;\n' +   // 设置尺寸
+      '}\n';
+    // 设置片元着色器
+    var FSHADER_SOURCE = 
+      'void main(){\n' +
+      ' gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);\n' +   // 设置颜色
+      '}\n';
+
+    function main() {
+      var canvas = document.querySelector('#webgl');
+      var gl = getWebGLContext(canvas);
+      if(!gl) {
+        console.log('Failed to get the endering context for WebGL');
+        return ;
+      }
+      // 初始化着色器
+      if(!initShaders(gl, VSHADER_SOURCE, FSHADER_SOURCE)) {
+        console.log('Failed to initialize shaders.');
+        return;
+      }
+
+      gl.clearColor(0.0, 0.0, 1.0, 1.0);
+      // 清空<canvas>
+      gl.clear(gl.COLOR_BUFFER_BIT);
+      // 绘制一个点
+      gl.drawArrays(gl.POINTS, 0, 1);
+    }
+  </script>
+</body>
+</html>
